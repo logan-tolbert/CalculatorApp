@@ -4,7 +4,8 @@ using System.Security.Cryptography;
 namespace Calculator
 {   /// <summary>
 /// A simple command line calculator project
-///
+///   NOTE: CODE that has been commented out does not function properly at this time
+///   
 ///     Author: Logan Tolbert
 /// </summary>
     internal class Program
@@ -115,6 +116,12 @@ namespace Calculator
         static void Main(string[] args)
         {
 
+            // Console Theme Control
+            Console.ForegroundColor = ConsoleColor.Green; 
+            Console.BackgroundColor = ConsoleColor.Black; 
+            Console.Clear();
+
+
             Int32 num1 = 0;
             Int32 num2 = 0;
             var menuItem = "";
@@ -141,7 +148,7 @@ namespace Calculator
 
             switch (menuItem)
             {
-                case ("a" or "A"):
+                case ("a" or "A"):// ADD
                     Console.WriteLine("Enter your two numbers and press ENTER.");
                     Console.Write(">>> ");
                     num1 = int.Parse(Console.ReadLine());
@@ -149,9 +156,10 @@ namespace Calculator
                     Console.Write($">>> {num1} + ");
                     num2 = int.Parse(Console.ReadLine());
 
+
                     add(num1, num2);
                     break;
-                case ("s" or "S"):
+                case ("s" or "S"):// SUBTRACT
                     Console.WriteLine("Type number and press ENTER.");
                     Console.Write(">>> ");
                     num1 = int.Parse(Console.ReadLine());
@@ -162,7 +170,8 @@ namespace Calculator
                     subtract(num1, num2);
                     break;
 
-                case ("m" or "M"):
+
+                case ("m" or "M"):// MULTIPLY
                     Console.WriteLine("Type number and press ENTER.");
                     Console.Write(">>> ");
                     num1 = int.Parse(Console.ReadLine());
@@ -173,7 +182,8 @@ namespace Calculator
                     multiply(num1, num2);
                     break;
 
-                case ("d" or "D"):
+
+                case ("d" or "D"):// DIVIDE
                     Console.WriteLine("Type number and press ENTER.");
                     Console.Write(">>> ");
                     num1 = int.Parse(Console.ReadLine());
@@ -184,7 +194,8 @@ namespace Calculator
                     divide(num1, num2);
                     break;
 
-                case ("r" or "R"):
+
+                case ("r" or "R"):// MODULUS/REMAINDER
                     Console.WriteLine("Type number and press ENTER.");
                     Console.Write(">>> ");
                     num1 = int.Parse(Console.ReadLine());
@@ -195,10 +206,11 @@ namespace Calculator
                     remainder(num1, num2);
                     break;
 
+
                 default:
                     Console.WriteLine("Function not currently available");
                     break;
-
+            
             }
         }
     }
