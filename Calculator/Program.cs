@@ -1,88 +1,147 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 
 namespace Calculator
 {   /// <summary>
 /// A simple command line calculator project
-///   NOTE: CODE that has been commented out does not function properly at this time
-///   
 ///     Author: Logan Tolbert
 /// </summary>
     internal class Program
     {
-        // ADD
-        //public static sbyte add(sbyte a, sbyte b)
-        //{
-        //    return (sbyte)(a + b);
-        //}
-
-        //public static byte add(byte x, byte y)
-        //{
-        //    return (byte)(x + y);
-        //}
-        
-        //public static short add(short x, short y) 
-        //{
-        //    return (short)(x + y); 
-        //}
-
-        public static void add(int x, int y)
+        static void Main(string[] args)
         {
-            int sum = x + y;
-            Console.WriteLine($"\n{x} + {y} = {sum}");
+            // Variables
+            var foreground = "Green";
+            var background = "Black";
+            var menuItem = "";
+            bool endProgram = false;
+            int num1 = 0;
+            int num2 = 0;
+
+            ConsoleTheme(foreground, background);
+            Console.WriteLine("\t- Console Calculator -");
+            Console.WriteLine("\t\tAlpha");
+            Console.WriteLine("Type the letter to run the desired function and press ENTER.\n");
+
+            do
+            {
+                // Menu
+                
+                Console.WriteLine("Functions");
+                Console.WriteLine("----------");
+                Console.WriteLine("A) ADD");
+                Console.WriteLine("S) SUBTRACT");
+                Console.WriteLine("M) MULTIPLY");
+                Console.WriteLine("D) DIVIDE");
+                Console.WriteLine("R) REMAINDER");
+
+                Console.WriteLine("Q) QUIT");
+                Console.WriteLine(Environment.NewLine);
+
+                Console.Write(">>> ");
+                menuItem = Console.ReadLine();
+
+                if (menuItem == null)
+                {
+                    Console.WriteLine("Please enter a valid menu option.");
+                }
+                else if (menuItem == "q" || menuItem == "Q")
+                {
+                    Console.WriteLine("Thanks for using Console Caluculator! Goodbye.");
+                    endProgram = true;
+                    break;
+                }
+
+                switch (menuItem)
+                {
+                    case ("a" or "A"):// ADD
+                        Console.WriteLine("Enter your two numbers and press ENTER.");
+                        Console.Write(">>> ");
+                        num1 = int.Parse(Console.ReadLine());
+                        Console.Write($">>> {num1} + ");
+                        num2 = int.Parse(Console.ReadLine());
+                        Console.WriteLine(Add(num1, num2));
+                        break;
+                    case ("s" or "S"):// SUBTRACT
+                        Console.WriteLine("Type number and press ENTER.");
+                        Console.Write(">>> ");
+                        num1 = int.Parse(Console.ReadLine());
+                        Console.Write($">>> {num1} - ");
+                        num2 = int.Parse(Console.ReadLine());
+                        Subtract(num1, num2);
+                        break;
+                    case ("m" or "M"):// MULTIPLY
+                        Console.WriteLine("Type number and press ENTER.");
+                        Console.Write(">>> ");
+                        num1 = int.Parse(Console.ReadLine());
+                        Console.Write($">>> {num1} * ");
+                        num2 = int.Parse(Console.ReadLine());
+                        Multiply(num1, num2);
+                        break;
+                    case ("d" or "D"):// DIVIDE
+                        Console.WriteLine("Type number and press ENTER.");
+                        Console.Write(">>> ");
+                        num1 = int.Parse(Console.ReadLine());
+                        Console.Write($">>> {num1} / ");
+                        num2 = int.Parse(Console.ReadLine());
+                        Divide(num1, num2);
+                        break;
+                    case ("r" or "R"):// MODULUS/REMAINDER
+                        Console.WriteLine("Type number and press ENTER.");
+                        Console.Write(">>> ");
+                        num1 = int.Parse(Console.ReadLine());
+                        Console.Write($">>> {num1} % ");
+                        num2 = int.Parse(Console.ReadLine());
+                        Modulus(num1, num2);
+                        break;
+                    default:
+                        Console.WriteLine("Function not available");
+                        break;
+
+                }
+            } while ((menuItem != "q") || (menuItem != "Q"));
+        }
+        // Console Theme
+        public static void ConsoleTheme(string Foreground, string Background)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
         }
 
-        //public static uint add(uint x, int y)
-        //{
-        //    return (uint)(x + y);
-        //}
+        // ADD
+        public static int Add(int x, int y)
+        {
+            var sum = x + y;
+            Console.WriteLine($"\n{x} + {y} = {sum}");
+            return sum;
+        }
 
+        public static int Add(int x, int y, int z)
+        {
+            var sum = x + y + z;
+            Console.WriteLine($"\n{x} + {y} + {z} = {sum}");
+            return sum;
+        }
 
-        //public static long add (long x, long y)
-        //{
-        //    return x + y;
-        //}
+        public static double Add(double x, double y)
+        {
+            var sum = x + y;
+            Console.WriteLine($"\n{x} + {y} = {sum}");
+            return sum;
+        }
 
-
-        //public static decimal add(decimal x, decimal y)
-        //{
-        //    return (decimal)x + y;
-        //}
-
-
-        //public static double add(double x, double y)
-        //{
-        //    return x + y;
-        //}
-
-
-        //public static float add(float x, float y) 
-        //{
-        //    return x + y; 
-        //}   
-
-
-        //public static string add(string x, string y)
-        //{
-        //    return x + y;
-        //}
-
-
-        //public static int add(params int[] values)
-        //{
-        //    int sum = 0;
-        //    foreach (int value in values)
-        //    {
-        //        sum += value;
-        //    }
-        //    return sum;
-        //}
-
-
+        public static double Add(double x, double y, double z)
+        {
+            var sum = x + y + z;
+            Console.WriteLine($"\n{x} + {y} + {z} = {sum}");
+            return x + y + z;
+        }
 
 
         // SUBTRACT
-        public static void subtract(int x, int y) 
+        public static void Subtract(int x, int y)
         {
             int difference = x - y;
             Console.WriteLine($"\n{x} - {y} = {difference}");
@@ -90,7 +149,7 @@ namespace Calculator
 
 
         // MULTIPLY
-        public static void multiply(int x, int y)
+        public static void Multiply(int x, int y)
         {
             int product = x + y;
             Console.WriteLine($"\n{x} * {y} = {product}");
@@ -98,120 +157,20 @@ namespace Calculator
 
 
         // DIVIDE
-        public static void divide(int x, int y)
+        public static void Divide(int x, int y)
         {
-            double quotient = (double) x / y;
+            double quotient = (double)x / y;
             Console.WriteLine($"\n{x} / {y} = {quotient}");
         }
 
 
-        // REMAINDER
-        public static void remainder(int x, int y)
+        // MODULUS
+        public static void Modulus(int x, int y)
         {
-            int sum = x % y;
-            Console.WriteLine($"\n{x} % {y} = {sum}");
+            int remainder = x % y;
+            Console.WriteLine($"\n{x} % {y} = {remainder}");
         }
 
 
-        static void Main(string[] args)
-        {
-
-            // Console Theme Control
-            Console.ForegroundColor = ConsoleColor.Green; 
-            Console.BackgroundColor = ConsoleColor.Black; 
-            Console.Clear();
-
-
-            Int32 num1 = 0;
-            Int32 num2 = 0;
-            var menuItem = "";
-
-            Console.WriteLine("\t- Console Calculator -");
-            Console.WriteLine("\t\tAlpha");
-            Console.WriteLine("Type the letter to run the desired function and press ENTER.\n");
-            Console.WriteLine("Functions");
-            Console.WriteLine("----------");
-            Console.WriteLine("A) ADD");
-            Console.WriteLine("S) SUBTRACT");
-            Console.WriteLine("M) MULTIPLY");
-            Console.WriteLine("D) DIVIDE");
-            Console.WriteLine("R) REMAINDER");
-            Console.WriteLine(Environment.NewLine);
-
-            Console.Write(">>> ");
-            menuItem = Console.ReadLine();
-
-            if (menuItem == null)
-            {
-                return;
-            }
-
-            switch (menuItem)
-            {
-                case ("a" or "A"):// ADD
-                    Console.WriteLine("Enter your two numbers and press ENTER.");
-                    Console.Write(">>> ");
-                    num1 = int.Parse(Console.ReadLine());
-
-                    Console.Write($">>> {num1} + ");
-                    num2 = int.Parse(Console.ReadLine());
-
-
-                    add(num1, num2);
-                    break;
-                case ("s" or "S"):// SUBTRACT
-                    Console.WriteLine("Type number and press ENTER.");
-                    Console.Write(">>> ");
-                    num1 = int.Parse(Console.ReadLine());
-
-                    Console.Write($">>> {num1} - ");
-                    num2 = int.Parse(Console.ReadLine());
-
-                    subtract(num1, num2);
-                    break;
-
-
-                case ("m" or "M"):// MULTIPLY
-                    Console.WriteLine("Type number and press ENTER.");
-                    Console.Write(">>> ");
-                    num1 = int.Parse(Console.ReadLine());
-
-                    Console.Write($">>> {num1} * ");
-                    num2 = int.Parse(Console.ReadLine());
-
-                    multiply(num1, num2);
-                    break;
-
-
-                case ("d" or "D"):// DIVIDE
-                    Console.WriteLine("Type number and press ENTER.");
-                    Console.Write(">>> ");
-                    num1 = int.Parse(Console.ReadLine());
-
-                    Console.Write($">>> {num1} / ");
-                    num2 = int.Parse(Console.ReadLine());
-
-                    divide(num1, num2);
-                    break;
-
-
-                case ("r" or "R"):// MODULUS/REMAINDER
-                    Console.WriteLine("Type number and press ENTER.");
-                    Console.Write(">>> ");
-                    num1 = int.Parse(Console.ReadLine());
-
-                    Console.Write($">>> {num1} % ");
-                    num2 = int.Parse(Console.ReadLine());
-
-                    remainder(num1, num2);
-                    break;
-
-
-                default:
-                    Console.WriteLine("Function not currently available");
-                    break;
-            
-            }
-        }
     }
 }
